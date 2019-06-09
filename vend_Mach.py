@@ -2,11 +2,11 @@ def vendM():
     """give user options  for virtual vending machine"""
 
     #print options for vending machine
-    print('Oreo Pack {0:10} Cheez-its {1:10} Snickers {2:10}\n'.format('(A1)', '(A2)', '(A3)'))
-    print("Fudge Rounds (B1)\t\tTwizzlers (B2)\tSour Patch Kids (B3)\n")
-    print("Skittles (C1)\t\tM & Ms (C2)\t\tBabe Ruth (C3)\n")
-    print("Hubba Bubba Max (D1)\tSnickers (D2)\tSlim Jim (D3)\n")
-    print("Hot Cheetos (E1)\t\t5 Gum (E2)\t\tAnimal Crackers (E3)\n")
+    print('{:<20} {:<20} {:<20}\n'.format('Oreo Pack (A1)', 'Cheez-its (A2)', 'Snickers (A3)'))
+    print('{:<20} {:<20} {:<20}\n'.format('Fudge Rounds (B1)', 'Twizzlers (B2)', 'Sour Patch Kids (B3)'))
+    print('{:<20} {:<20} {:<20}\n'.format('Skittles (C1)', 'M & Ms (C2)', 'Babe Ruth (C3)'))
+    print('{:<20} {:<20} {:<20}\n'.format('Hubba Bubba (D1)', 'Snickers (D2)', 'Slim Jim (D3)'))
+    print('{:<20} {:<20} {:<20}\n'.format('Hot Cheetos (E1)', '5 Gum (E2)', 'Animal Crackers (E3)'))
 
     #dictionary of vending option codes and prices
     dict_vend_opts = {'A1':'$2.00','A2':'$1.15','A3':'$1.00',
