@@ -14,12 +14,12 @@ def vendM():
                       'C1':'$1.50','C2':'$1.35','C3':'$0.85',
                       'D1':'$1.35','D2':'$1.65','D3':'$1.75',
                       'E1':'$1.00','E2':'$1.25','E3':'$0.95'}
-    #ask user for their choice
-    choice_vend =  input("Select your snack: ")
 
+    #ask user which snack they want to check price for
+    choice_vend =  input("Check snack price: ")
     #make cases for each selection
     if choice_vend == " ":
-        pass
+        print("Please enter a snack code: ")
     elif choice_vend[:1] == "A":
         if choice_vend[1:] == "1":
             print("Cost: ", dict_vend_opts[choice_vend])
@@ -57,9 +57,13 @@ def vendM():
             print("Cost: ", dict_vend_opts[choice_vend])
     else:
         while choice_vend not in dict_vend_opts.keys():
-            print("Not a selection. Try again!\n")
-            choice_vend =  input("Select your snack: ")
+            print("Not a valid selection. Try again!\n")
+            choice_vend =  input("Check snack price: ")
             if choice_vend in dict_vend_opts.keys():
                 print("Cost: ", dict_vend_opts[choice_vend])
+
+    #select which snack based on price
+    sel_vend = input("Select your snack: ")
+    print("Price: ", dict_vend_opts[sel_vend])
             
     return None
