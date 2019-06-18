@@ -10,6 +10,8 @@ def vendM():
     print('{:<20} {:<20} {:<20}\n'.format('Hubba Bubba (D1)', 'Snickers (D2)', 'Slim Jim (D3)'))
     print('{:<20} {:<20} {:<20}\n'.format('Hot Cheetos (E1)', '5 Gum (E2)', 'Animal Crackers (E3)'))
     print('-' * 70)
+    print('ONLY ACCEPTS QUARTERS')
+    print('-' * 70)
     
     #dictionary of vending option codes and prices
     dict_vend_opts = {'A1': '2.00','A2': '1.00','A3': '1.00',
@@ -99,4 +101,7 @@ def vendM():
             
     return None
 
+#SOURCES
 #https://pyformat.info/
+#https://realpython.com/python-dicts/
+#https://www.tutorialspoint.com/python/python_if_else.htm
