@@ -98,7 +98,9 @@ class vendMach {
 			    }
 		    } while (verifSnak.equals("N"));
 		    
-		    choiceMsg2 += "Your snack choice: " + getSnak + "was vended."; //print out snack choice
+		    int selSnk = Arrays.asList(indexArray).indexOf(getSnak); //get index of snack
+		    String showSnk = snackArray[selSnk]; //get index of snack from snack array
+		    choiceMsg2 += "Your snack choice: " + showSnk + " vended."; //print out snack choice
 		    
 		    //if ... else if choice in snack array
 		    if (chkMsg2 == true) {
@@ -135,24 +137,65 @@ class vendMach {
 			System.out.println(amtMsg); //print string asking for user amount
 			double amtSnak = askSnak2.nextDouble(); //get user input for payment
 			double chgAmt = priceAmt - amtSnak; //get change from user input
-			System.out.println(String.format("You need: $%.2f", chgAmt));
 			
-			//loop for user input if not equal to price
-			do {
-				System.out.println(amtMsg);
-				amtSnak = askSnak2.nextDouble();
-				double newPrice = chgAmt - amtSnak;
-				
-				chgAmt = newPrice;
+			//case if user input amount is greater than snack price
+			if (amtSnak >= priceAmt) {
+				chgAmt = amtSnak - priceAmt; //alter change amount to be amount minus price
+				System.out.println(String.format("Change: $%.2f", chgAmt)); //print change amount
+				askSnak2.close(); //close snack scanner
+			}
+			//case if user input is between priceAmt and 0
+			else if (amtSnak < priceAmt && amtSnak > 0){
+				//print needed remaining amount from user
 				System.out.println(String.format("You need: $%.2f", chgAmt));
 				
-				if (chgAmt == 0.0) {
-					break;
-				}//break statement
-			} while (chgAmt !=0); //end while loop
-			
-		    askSnak2.close();
-		    
+				//loop for user input if not equal to price
+				do {
+					System.out.println(amtMsg);
+					amtSnak = askSnak2.nextDouble();
+					double newPrice = chgAmt - amtSnak;
+					
+					chgAmt = newPrice;
+					System.out.println(String.format("You need: $%.2f", chgAmt));
+					
+					if (chgAmt == 0.0) {
+						break;
+					}//break statement
+				} while (chgAmt !=0); //end while loop
+				
+			    askSnak2.close(); //close snack scanner
+			}
+			//case if user input is less than 0
+			else {
+				while (amtSnak < priceAmt) {
+					System.out.println("Invalid input. Try again!");
+					System.out.println(amtMsg); //print string asking for user amount
+					amtSnak = askSnak2.nextDouble(); //get user input for payment
+					//if amtSnak is greater than or equal to 0
+					if (amtSnak >= 0) {
+						chgAmt = priceAmt - 0; //reset chgAmt
+						break;
+					}
+				}
+				//print needed remaining amount from user
+				System.out.println(String.format("You need: $%.2f", chgAmt));
+				
+				//loop for user input if not equal to price
+				do {
+					System.out.println(amtMsg);
+					amtSnak = askSnak2.nextDouble();
+					
+					double newPrice = chgAmt - amtSnak;
+					chgAmt = newPrice;
+					System.out.println(String.format("You need: $%.2f", chgAmt));
+					
+					if (chgAmt == 0.0) {
+						break;
+					}//break statement
+				} while (chgAmt !=0); //end while loop
+				
+			    askSnak2.close(); //close snack scanner
+				}
 		}//end of amountChk method
 	}//end pricing class 
 	
