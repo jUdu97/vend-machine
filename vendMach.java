@@ -86,7 +86,6 @@ class vendMach {
 		    String verifSnak;
 		    
 		    Boolean chkMsg2 = Arrays.asList(indexArray).contains(getSnak);
-		    int seeIndex = Arrays.asList(indexArray).indexOf(getSnak);
 		    String choiceMsg2="";
 		    
 		    //loop condition for confirmation of snack
@@ -99,21 +98,63 @@ class vendMach {
 			    }
 		    } while (verifSnak.equals("N"));
 		    
-		    choiceMsg2 += "Your snack choice: "; //print out snack choice and price
+		    choiceMsg2 += "Your snack choice: " + getSnak + "was vended."; //print out snack choice
 		    
+		    //if ... else if choice in snack array
 		    if (chkMsg2 == true) {
-		    	choiceMsg2 += getSnak + ", Price: $" + priceArray[seeIndex];
+		    	pricing snkPrice = new pricing();
+			    snkPrice.amountChk(getSnak);
+			    choiceMsg2 += "\nEnjoy!";
 		    } else {
 		    	choiceMsg2 += "None";
 		    }
-		    
+		   
 		    askSnak.close(); //close askSnak scanner
 		    confirmSnak.close(); //close confirmSnak scanner
 		    
-		    return choiceMsg2;
+		    return choiceMsg2; //return snack choice and price;
 		    
 		}//end checking snack method
-	}//end choosing method
+	}//end choosing class 
+	
+	static class pricing extends vendMach {
+		public void amountChk (String snChk) {
+			//get index of chosen snack code
+			int dolIndex = Arrays.asList(indexArray).indexOf(snChk);
+			
+			//get price of chosen snack price
+			double priceAmt = priceArray[dolIndex];
+			
+			//print out price of chosen snack
+			String priceMsg = "Price: $" + priceAmt;
+			System.out.println(priceMsg);
+			
+			//ask user to input quarters 
+			Scanner askSnak2 = new Scanner(System.in);
+			String amtMsg = "Amount: $"; 
+			System.out.println(amtMsg); //print string asking for user amount
+			double amtSnak = askSnak2.nextDouble(); //get user input for payment
+			double chgAmt = priceAmt - amtSnak; //get change from user input
+			System.out.println(String.format("You need: $%.2f", chgAmt));
+			
+			//loop for user input if not equal to price
+			do {
+				System.out.println(amtMsg);
+				amtSnak = askSnak2.nextDouble();
+				double newPrice = chgAmt - amtSnak;
+				
+				chgAmt = newPrice;
+				System.out.println(String.format("You need: $%.2f", chgAmt));
+				
+				if (chgAmt == 0.0) {
+					break;
+				}//break statement
+			} while (chgAmt !=0); //end while loop
+			
+		    askSnak2.close();
+		    
+		}//end of amountChk method
+	}//end pricing class 
 	
 	//start main
 	public static void main (String[] args) {
@@ -129,4 +170,6 @@ class vendMach {
 //Sources
 //https://www.w3schools.com/java/java_user_input.asp
 //https://www.javatpoint.com/substring
+//https://www.geeksforgeeks.org/scanner-class-in-java/
+//https://javadevnotes.com/java-double-to-string-2-decimal-places-examples
  
