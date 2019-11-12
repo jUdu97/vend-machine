@@ -1,7 +1,7 @@
 # Vending Machine
 
 ## Description
-programming scripts that simulate a vending machine.
+2 programming scripts that simulate a vending machine.
 
 ## Installation
-download the script files and run in IDLE and Eclipse editor.
+Download the script files and run in IDLE and Eclipse editor.
