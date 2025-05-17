@@ -1,7 +1,5 @@
 class VendingMachine:
 
-    dict_vend_opts = None
-
     def __init__(self, name):
         self.name=name
 
