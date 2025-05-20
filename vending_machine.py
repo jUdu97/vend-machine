@@ -1,7 +1,8 @@
 class VendingMachine:
-
-    def __init__(self, name):
+    dictionary = {}
+    def __init__(self, name, dictionary):
         self.name=name
+        self.dictionary=dictionary
 
     def __str__(self):
         return f"{self.name}"
@@ -22,14 +23,8 @@ class VendingMachine:
         print('{:<20} {:<20} {:<20}\n'.format('Hot Cheetos (E1)', '5 Gum (E2)', 'Animal Crackers (E3)'))
         print('-' * 70)
 
-    def make_selection(self):
-        """ """
-        dict_vend_opts = {'A1': '2.00','A2': '1.00','A3': '1.00',
-                          'B1': '1.75','B2': '1.50','B3': '2.25',
-                          'C1': '1.50','C2': '1.25','C3': '0.50',
-                          'D1': '1.25','D2': '1.75','D3': '1.75',
-                          'E1': '1.00','E2': '1.25','E3': '0.75'}
-
+    def check_choice(self):
+        """ Request that user select a corresponding snack code to the snack that they wish to purchase"""
         #ask user which snack they want to check price for
         choice_vend =  input("Enter snack code: ")
 
@@ -43,45 +38,45 @@ class VendingMachine:
                 print("Please enter a snack code: ")
             elif choice_vend[:1].upper() == "A":
                 if choice_vend[1:] == "1":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 elif choice_vend[1:] == "2":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 else:
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
             elif choice_vend[:1].upper() == "B":
                 if choice_vend[1:] == "1":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 elif choice_vend[1:] == "2":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 else:
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
             elif choice_vend[:1].upper() == "C":
                 if choice_vend[1:] == "1":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 elif choice_vend[1:] == "2":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 else:
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
             elif choice_vend[:1].upper() == "D":
                 if choice_vend[1:] == "1":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 elif choice_vend[1:] == "2":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 else:
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
             elif choice_vend[:1].upper() == "E":
                 if choice_vend[1:] == "1":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 elif choice_vend[1:] == "2":
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
                 else:
-                    print("Cost: $", dict_vend_opts[choice_vend.upper()])
+                    print("Cost: $", self.dictionary[choice_vend.upper()])
             else:
-                while choice_vend.upper() not in dict_vend_opts.keys():
+                while choice_vend.upper() not in self.dictionary.keys():
                     print("Not a valid selection. Try again!\n")
                     choice_vend =  input("Check snack price: ")
-                    if choice_vend.upper() in dict_vend_opts.keys():
-                        print("Cost: ", dict_vend_opts[choice_vend.upper()])
+                    if choice_vend.upper() in self.dictionary.keys():
+                        print("Cost: ", self.dictionary[choice_vend.upper()])
                         break
         #case if confirmation input is NO
         elif choice_confirm.upper() == "N":
@@ -102,45 +97,52 @@ class VendingMachine:
                 choice_confirm = input("CONFIRM (Y/N)?: ")
                 if choice_confirm.upper() == "Y" or choice_confirm.upper() == "N":
                     break
+
+    def format_change(self, name_of_currency, price_to_convert):
+        """ Formatter for prices of snacks """
+        return name_of_currency+': ${:0.2f}'.format(float(price_to_convert))
+
+    def make_selection(self):
+        """ Process of making selection of snack"""
+        #check choice made by user
+        self.check_choice()
+
         #select which snack user confirms to buy based on price
         sel_vend = input("Select your snack: ")
-        while sel_vend.upper() not in dict_vend_opts.keys():
+        while sel_vend.upper() not in self.dictionary.keys():
             print("Not a valid selection. Try again!\n")
             sel_vend =  input("Check snack price: ")
-            if sel_vend.upper() in dict_vend_opts.keys():
+            if sel_vend.upper() in self.dictionary.keys():
                 break
-        sel_price = dict_vend_opts[sel_vend.upper()]
-        print('Price: ${:0.2f}'.format(float(sel_price)))
+        sel_price = self.dictionary[sel_vend.upper()]
+        print(self.format_change("Price", sel_price))
 
         #make list of approved amount inputs
-        priceLst = []
+        price_list = []
         for i in range(100):
-            priceLst.append(i*0.25)
+            price_list.append(i*0.25)
+
         #ask user to pay for snack
         ask_price = input("Amount: ")
-        if float(ask_price) not in priceLst:
+        if float(ask_price) not in price_list:
             print("Invalid input. Use different currency.")
-            while float(ask_price) not in priceLst:
+            while float(ask_price) not in price_list:
                 ask_price = input("Amount: ")
-                if float(ask_price) in priceLst:
+                if float(ask_price) in price_list:
                     break
-        userChg = float(ask_price) - float(sel_price)
+        user_chg = float(ask_price) - float(sel_price)
 
         #case statements for user amount
         if float(ask_price) > float(sel_price):
-            userChg = float(userChg)
-            print("Change: ${:0.2f}".format(float(userChg)))
-            print("\nSnack vended!\nThanks for buying!")
+            print(self.format_change("Change", user_chg)+'\nSnack vended!\nThanks for buying!')
         elif float(ask_price) < float(sel_price):
-            userChg = float(sel_price) - float(ask_price)
-            userChg = float(userChg)
-            newChg = float(sel_price) - float(userChg)
-            while newChg != 0:
-                print('You need: ${:0.2f}'.format(float(userChg)), ' to vend this snack.\nKeep going!')
+            user_chg = float(sel_price) - float(ask_price)
+            new_chg = float(sel_price) - float(user_chg)
+            while new_chg != 0:
+                print(self.format_change("You need", user_chg)+' to vend this snack.\nKeep going!')
                 ask_price = input("Amount: ")
-                newChg = float(userChg) - float(ask_price)
-                userChg = float(newChg)
+                new_chg = float(user_chg) - float(ask_price)
+                user_chg = new_chg
             print("\nSnack vended!\nThanks for buying!")
         else:
-            userChg = float(userChg)
             print("\nSnack vended!\nThanks for buying!")
