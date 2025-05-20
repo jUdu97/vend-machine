@@ -119,6 +119,8 @@ class VendingMachine:
             price_list.append(i*0.25)
 
         #ask user to pay for snack
+        print('INPUT AMOUNT WITH IN FORMAT: $X.XX!')
+        print('-' * 70)
         ask_price = input("Amount: ")
         if float(ask_price) not in price_list:
             print("Invalid input. Use different currency.")
