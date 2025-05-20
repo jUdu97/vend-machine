@@ -10,3 +10,4 @@ dict_vend_opts = {'A1': '2.00','A2': '1.00','A3': '1.00',
 vMach = VendingMachine("Lemmingway", dict_vend_opts)
 vMach.print_welcome()
 vMach.show_options()
+vMach.make_selection()
