@@ -144,3 +144,11 @@ class VendingMachine:
             print("\nSnack vended!\nThanks for buying!")
         else:
             print("\nSnack vended!\nThanks for buying!")
+
+        self.print_goodbye()
+
+    def print_goodbye(self):
+        """ Prints goodbye message to vending machine """
+        print('-' * 70)
+        print('All Content © 2025 '+self.name+' Vending Machine. All Right Reserved.\n')
+        print('-' * 70)
