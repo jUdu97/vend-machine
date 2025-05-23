@@ -150,5 +150,5 @@ class VendingMachine:
     def print_goodbye(self):
         """ Prints goodbye message to vending machine """
         print('-' * 70)
-        print('All Content © 2025 '+self.name+' Vending Machine. All Right Reserved.\n')
+        print('All Content © 2025 '+self.name+' Vending Machine. All Rights Reserved.\n')
         print('-' * 70)
